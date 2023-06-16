@@ -15,9 +15,10 @@
 //Beispiel: Zufallszahl = 1 --> choices[1], somit "Paper"
 //Output: return choices[randomNumber]
 
+//Erstellt eine Zufallszahl zwischen 0 und 2 und gibt darauf basierend entweder Rock, Paper oder Scissor zurück
 function getComputerChoice() {
-    let choices = ["Rock", "Paper", "Scissor"];
-    let randomNumber = Math.floor(Math.random() * 3); //Erstellt Zufallszahl zwischen 0 und 2 > 0,1 oder 2
+    const choices = ["Rock", "Paper", "Scissor"];
+    const randomNumber = Math.floor(Math.random() * 3); //Erstellt Zufallszahl zwischen 0 und 2 > 0,1 oder 2
     return choices[randomNumber];
 }
 
@@ -27,13 +28,13 @@ function getComputerChoice() {
 //Function playRound
 
 //Gewünschter Output:
-//Nimmt zwei Paramater entgegen: 1. Die Auswahl des Spielers, 2. Die Auswahl des Computers;
+//Nimmt zwei Parameter entgegen: 1. Die Auswahl des Spielers, 2. Die Auswahl des Computers;
 //Auf Basis der Auswahl beider Spieler wird anschließend der Gewinner ermittelt. Verliert der Spieler, so soll folgendes ausgegeben werden: "You Lose! X beats Y", wobei X und Y als Platzhalter für Rock/Paper/Scissor fungieren
 //Der Input Spieler-seitig soll via prompt geschehen und muss im Zuge der Berechnung als nicht-case-sensitive behandelt werden: RocK, ROCK, rOcK = rock
 
 //Algo:
 //1. Erstelle eine Funktion namens playRound, welche zwei Paramter enthält: computerSelection, playerSelection
-//computerSelection ist dabei eine Fallback-Function und bezieht sich auf die zuvor erstellte Funktion getComputerChoice
+//computerSelection ist dabei eine Callback-Function und bezieht sich auf die zuvor erstellte Funktion getComputerChoice
 //playerSelection ist dabei ein einfacher String, beruhend auf den Eingaben des Users
 //2. Erstelle winner Variable und überprüfe folgende Logiken, damit Gewinner euriert werden kann:
 /*
@@ -56,6 +57,58 @@ WENN USER PAPIER AUSWÄHLT:
     //1. Frage den Benutzer mittels prompt nach seiner Auswahl
     //2. Wenn die Auswahl eines der drei Möglichkeiten entspricht, kann die Funktion playRound aufgerufen werden, falls nicht, wird dem User mitgeteilt, dass seine Auswahl ungültig war und der prompt wird erneut getriggert
     //3. Erstelle für die zuvor genannten Schritte (1. u. 2.) eine eigene Funktion (Merke: One Function > One Action; Im Zuge des Code-Refacturing dann erneut überprüfen, sobald Grund-Logik steht)
+
+    
+function getUserInput() {
+    const userInput = prompt("Rock, Paper or Scissor? ").toLowerCase();
+    
+    if(userInput == "rock" || userInput == "paper" || userInput == "scissor") {
+        playRound(getComputerChoice,userInput);
+    } else {
+        alert("Sorry, but your input was not valid.");
+        const again = prompt("Try again? (y/n) ");
+        if(again == "y") {
+            getUserInput();
+        } else {
+            alert("Have a nice one! Bye!");
+        }
+    }
+}
+
+function playRound(computerSelection, playerSelection) {
+
+    const winner = "";
+
+    if (playerSelection == "scissor") {
+        if (computerSelection == "scissor") {
+            winner = "draw";
+        } else if (computerSelection == "rock") {
+            winner = "computer";
+        } else {
+            winner = "player";
+        }
+    } else if (playerSelection == "paper") {
+        if (computerSelection == "scissor") {
+            winner = "computer";
+        } else if (computerSelection == "rock") {
+            winner = "player";
+        } else {
+            winner = "draw";
+        }
+    } else {
+        if (playerSelection == "rock") {
+            if (computerSelection == "scissor") {
+                winner = "player";
+            } else if (computerSelection == "rock") {
+                winner = "draw";
+            } else {
+                winner = "computer";
+            }
+        }
+    }
+    return winner;
+}
+
 
 //Function game()
 //Gewünschter Output:
