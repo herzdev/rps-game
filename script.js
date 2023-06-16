@@ -71,7 +71,6 @@ function getUserInput() {
             getUserInput();
         } else {
             alert("Have a nice one! Bye!");
-            break;
         }
     }
 }
