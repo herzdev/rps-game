@@ -17,9 +17,9 @@
 
 //Erstellt eine Zufallszahl zwischen 0 und 2 und gibt darauf basierend entweder Rock, Paper oder Scissor zurück
 function getComputerChoice() {
-    const choices = ["Rock", "Paper", "Scissor"];
-    const randomNumber = Math.floor(Math.random() * 3); //Erstellt Zufallszahl zwischen 0 und 2 > 0,1 oder 2
-    return choices[randomNumber];
+    let choices = ["Rock", "Paper", "Scissor"];
+    let randomNumber = Math.floor(Math.random() * 3); //Erstellt Zufallszahl zwischen 0 und 2 > 0,1 oder 2
+    return choices[randomNumber].toLowerCase();
 }
 
 // console.log(getComputerChoice()); //Call der Funktion getComputerChoice()
@@ -60,24 +60,25 @@ WENN USER PAPIER AUSWÄHLT:
 
     
 function getUserInput() {
-    const userInput = prompt("Rock, Paper or Scissor? ").toLowerCase();
+    let userInput = prompt("Rock, Paper or Scissor? ").toLowerCase();
     
     if(userInput == "rock" || userInput == "paper" || userInput == "scissor") {
-        playRound(getComputerChoice,userInput);
+        return userInput;
     } else {
         alert("Sorry, but your input was not valid.");
-        const again = prompt("Try again? (y/n) ");
+        let again = prompt("Try again? (y/n) ");
         if(again == "y") {
             getUserInput();
         } else {
             alert("Have a nice one! Bye!");
+            break;
         }
     }
 }
 
 function playRound(computerSelection, playerSelection) {
 
-    const winner = "";
+    let winner = "";
 
     if (playerSelection == "scissor") {
         if (computerSelection == "scissor") {
@@ -127,3 +128,32 @@ function playRound(computerSelection, playerSelection) {
 //Wenn computerWinCounter > playerWinCounter = Computer ist Gewinner
 //Wenn playerWinCounter > computerWinCounter = Player ist Gewinner
 //Wenn computerWinCounter == playerWinCounter = Unentschieden
+
+function game() {
+    let playerWinCounter = 0;
+    let computerWinCounter = 0;
+    let result = "";
+
+    for (let i = 0; i < 5; i++) {
+        result = playRound(getComputerChoice(),getUserInput());
+        if(result == "player") {
+            console.log("Player hat diese Runde gewonnen.")
+            playerWinCounter++;
+        } else if (result == "computer") {
+            console.log("Computer hat diese Runde gewonnen.");
+            computerWinCounter++;
+        } else {
+            console.log("Diese Runde verlief unentschieden!");
+        }
+    }
+
+    if (computerWinCounter > playerWinCounter) {
+        console.log(`Finaler Score: Computer: ${computerWinCounter} vs. Player: ${playerWinCounter} Computer ist der finale Gewinner!`);
+    } else if (playerWinCounter > computerWinCounter) {
+        console.log(`Finaler Score: Computer: ${computerWinCounter} vs. Player: ${playerWinCounter} Player ist der finale Gewinner!`);
+    } else {
+        console.log(`Finaler Score: Computer: ${computerWinCounter} vs. Player: ${playerWinCounter} Unentschieden!`);
+    }
+}
+
+game(); //Start RPS-Game
