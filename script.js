@@ -1,7 +1,9 @@
 //Function getComputerChoice erstellen
-//Output: Gibt per Zufallsprinzip einen von drei Spielmöglichkeiten zurück; Entweder Rock, Paper oder Scissor; Diese Auswahl ist für den Computer gedacht
-//Problem: Wie erstelle ich die Randomisierung?
-//Lösung:
+//Gewünschter Output: Gibt per Zufallsprinzip einen von drei Spielmöglichkeiten zurück; Entweder Rock, Paper oder Scissor; Diese Auswahl ist für den Computer gedacht
+
+//Mögliche Probleme: Wie erstelle ich die Randomisierung?
+
+//Algo:
     //0. Erstelle die Funktion Namens getComputerChoice(), welche 0 Parameter besitzt
     //1. Definiere die zur Verfügung stehenden Auswahlmöglichkeiten in einem Array
     //Beispiel: let choices = ["Rock", "Paper", Scissor]
@@ -17,46 +19,58 @@ function getComputerChoice() {
     let choices = ["Rock", "Paper", "Scissor"];
     let randomNumber = Math.floor(Math.random() * 3); //Erstellt Zufallszahl zwischen 0 und 2 > 0,1 oder 2
     return choices[randomNumber];
-
 }
 
 // console.log(getComputerChoice()); //Call der Funktion getComputerChoice()
 
 
 //Function playRound
+
 //Gewünschter Output:
 //Nimmt zwei Paramater entgegen: 1. Die Auswahl des Spielers, 2. Die Auswahl des Computers;
 //Auf Basis der Auswahl beider Spieler wird anschließend der Gewinner ermittelt. Verliert der Spieler, so soll folgendes ausgegeben werden: "You Lose! X beats Y", wobei X und Y als Platzhalter für Rock/Paper/Scissor fungieren
 //Der Input Spieler-seitig soll via prompt geschehen und muss im Zuge der Berechnung als nicht-case-sensitive behandelt werden: RocK, ROCK, rOcK = rock
-//Lösungen:
+
+//Algo:
 //1. Erstelle eine Funktion namens playRound, welche zwei Paramter enthält: computerSelection, playerSelection
 //computerSelection ist dabei eine Fallback-Function und bezieht sich auf die zuvor erstellte Funktion getComputerChoice
 //playerSelection ist dabei ein einfacher String, beruhend auf den Eingaben des Users
-//2. Erstelle winnerStatement Variable und überprüfe folgende Logiken, damit Gewinner euriert werden kann:
+//2. Erstelle winner Variable und überprüfe folgende Logiken, damit Gewinner euriert werden kann:
 /*
 
 WENN USER SCHERE AUSWÄHLT:
-    SCHERE AUF SCHERE = UNENTSCHIEDEN
-    SCHERE AUF STEIN = VERLOREN
-    SCHERE AUF PAPIER = GEWONNEN
+    SCHERE AUF SCHERE = UNENTSCHIEDEN //winner=draw
+    SCHERE AUF STEIN = VERLOREN //winner=computer
+    SCHERE AUF PAPIER = GEWONNEN //winner=player
 WENN USER STEIN AUSWÄHLT:
-    STEIN SCHLÄGT SCHERE = GEWONNEN
-    STEIN AUF STEIN = UNENTSCHIEDEN
-    STEIN VERLIERT GEGEN PAPIER = VERLOREN
+    STEIN SCHLÄGT SCHERE = GEWONNEN //winner=player
+    STEIN AUF STEIN = UNENTSCHIEDEN //winner=draw
+    STEIN VERLIERT GEGEN PAPIER = VERLOREN //winner=computer
 WENN USER PAPIER AUSWÄHLT:
-    PAPIER VERLIERT GEGEN SCHERE = VERLOREN
-    PAPIER SCHLÄGT STEIN = GEWONNEN
-    PAPIER AUF PAPIER = UNENTSCHIEDEN
+    PAPIER VERLIERT GEGEN SCHERE = VERLOREN //winner=computer
+    PAPIER SCHLÄGT STEIN = GEWONNEN //winner=player
+    PAPIER AUF PAPIER = UNENTSCHIEDEN //winner=draw
 */
-//3. Return gewinnerStatement
+//3. Return gewinner
 //Um playerSelection zu erhalten, muss folgendes vor dem Funktionsaufruf implementiert werden:
     //1. Frage den Benutzer mittels prompt nach seiner Auswahl
     //2. Wenn die Auswahl eines der drei Möglichkeiten entspricht, kann die Funktion playRound aufgerufen werden, falls nicht, wird dem User mitgeteilt, dass seine Auswahl ungültig war und der prompt wird erneut getriggert
-
-//
-
+    //3. Erstelle für die zuvor genannten Schritte (1. u. 2.) eine eigene Funktion (Merke: One Function > One Action; Im Zuge des Code-Refacturing dann erneut überprüfen, sobald Grund-Logik steht)
 
 //Function game()
+//Gewünschter Output:
+//Spiele 5 Runden RPS, nach jeder Runde wird via Konsole der Gewinner ausgegeben; Am Ende der 5 gespielten Runden wird der finale Gewinner über alle 5 Runden ausgegeben. Ein Best of 3, bei dem derjenige der Gewinner ist, der als erstes 3 Runden gewonnen hat; (Bo3 Implementierung optional, da zuerst auch alle 5 Runden gespielt werden können und dann wird erst ausgewertet)
 
-
-
+//Algo:
+//Erstelle Function namens game(), ohne Parameter
+//Erstelle zwei Variablen, die als Win-Counter für den Spieler als auch für den Computer fungieren
+//Erstelle eine for-Loop, welche 5 Mal durchläuft; bei jedem Durchlauf invoke folgende Function: playRound()
+//Nach jedem Durchlauf return-Wert (winner) von playRound() überprüft werden;
+//Teile dem User mittels console.log mit, wer gewonnen hat (nach jeder Runde/jedem Schleifen-Durchlauf)
+//Wenn player, dann playerWincounter += 1;
+//Wenn computer, dann computerWincounter +=1;
+//Wenn Draw, dann rechne keinem einen Win an;
+//Entscheide wer gewonnen hat, anhand folgender Logik
+//Wenn computerWinCounter > playerWinCounter = Computer ist Gewinner
+//Wenn playerWinCounter > computerWinCounter = Player ist Gewinner
+//Wenn computerWinCounter == playerWinCounter = Unentschieden
