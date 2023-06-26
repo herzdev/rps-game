@@ -170,7 +170,7 @@ if button got clicked
     get id
     call function plaRound(computerChoice(), id(String));
 */
-const btns = document.querySelectorAll("button");
+const btns = document.querySelectorAll(".button-container button");
 const div = document.querySelector("#results");
 // console.log(btns);
 btns.forEach((element) => {
@@ -180,4 +180,26 @@ btns.forEach((element) => {
         div.appendChild(p);
     });
 });
+
+//Delete output in div
+/*
+ALGO
+setze eventlistener auf btn "delete div content"
+selektiere ganzen content innerhalb btn-container div
+lösche den zuvor selektierten inhalt
+*/
+const delDivContentBtn = document.querySelector("#deleteOutput");
+// console.log(delDivContent);
+
+delDivContentBtn.addEventListener("click", () => {
+    
+    const divContent = document.querySelector("#results");
+    const allPs = document.querySelectorAll("p");
+
+    allPs.forEach((element) => {
+        divContent.removeChild(element);
+    });
+});
+
+
 
