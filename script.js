@@ -155,4 +155,4 @@ function game() {
     }
 }
 
-game(); //Start RPS-Game
+// game(); //Start RPS-Game
