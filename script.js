@@ -156,3 +156,21 @@ function game() {
 }
 
 // game(); //Start RPS-Game
+
+//Add EventListeners to buttons
+/*
+ALGO
+select all buttons
+set eventlistener on all buttons
+if button got clicked
+    get id
+    call function plaRound(computerChoice(), id(String));
+*/
+const btns = document.querySelectorAll("button");
+// console.log(btns);
+btns.forEach((element) => {
+    element.addEventListener("click", () => {
+        console.log(playRound(getComputerChoice(), element.id));
+        // console.log(element.id);
+    });
+});
