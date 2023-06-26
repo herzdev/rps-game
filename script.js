@@ -128,31 +128,35 @@ function playRound(computerSelection, playerSelection) {
 //Wenn playerWinCounter > computerWinCounter = Player ist Gewinner
 //Wenn computerWinCounter == playerWinCounter = Unentschieden
 
-function game() {
+function game(userInput) {
     let playerWinCounter = 0;
     let computerWinCounter = 0;
     let result = "";
+    let pString = "";
 
     for (let i = 0; i < 5; i++) {
-        result = playRound(getComputerChoice(),getUserInput());
+        result = playRound(getComputerChoice(), userInput.toLowerCase());
         if(result == "player") {
-            console.log("Player hat diese Runde gewonnen.")
+            pString += "Player hat diese Runde gewonnen. \n";
             playerWinCounter++;
         } else if (result == "computer") {
-            console.log("Computer hat diese Runde gewonnen.");
+            pString += "Computer hat diese Runde gewonnen. \n";
             computerWinCounter++;
         } else {
-            console.log("Diese Runde verlief unentschieden!");
+            pString += "Diese Runde verlief unentschieden! \n";
         }
     }
 
+    // console.log(pString);
+
     if (computerWinCounter > playerWinCounter) {
-        console.log(`Finaler Score: Computer: ${computerWinCounter} vs. Player: ${playerWinCounter} Computer ist der finale Gewinner!`);
+        pString += `Finaler Score: Computer: ${computerWinCounter} vs. Player: ${playerWinCounter} Computer ist der finale Gewinner!`;
     } else if (playerWinCounter > computerWinCounter) {
-        console.log(`Finaler Score: Computer: ${computerWinCounter} vs. Player: ${playerWinCounter} Player ist der finale Gewinner!`);
+        pString += `Finaler Score: Computer: ${computerWinCounter} vs. Player: ${playerWinCounter} Player ist der finale Gewinner!`;
     } else {
-        console.log(`Finaler Score: Computer: ${computerWinCounter} vs. Player: ${playerWinCounter} Unentschieden!`);
+        pString += `Finaler Score: Computer: ${computerWinCounter} vs. Player: ${playerWinCounter} Unentschieden!`;
     }
+    return pString;
 }
 
 // game(); //Start RPS-Game
@@ -171,10 +175,8 @@ const div = document.querySelector("#results");
 // console.log(btns);
 btns.forEach((element) => {
     element.addEventListener("click", () => {
-        // console.log(playRound(getComputerChoice(), element.id));
-        // console.log(element.id);
         const p = document.createElement("p");
-        p.innerText = playRound(getComputerChoice(), element.id);
+        p.innerText = game(element.id);
         div.appendChild(p);
     });
 });
