@@ -167,10 +167,15 @@ if button got clicked
     call function plaRound(computerChoice(), id(String));
 */
 const btns = document.querySelectorAll("button");
+const div = document.querySelector("#results");
 // console.log(btns);
 btns.forEach((element) => {
     element.addEventListener("click", () => {
-        console.log(playRound(getComputerChoice(), element.id));
+        // console.log(playRound(getComputerChoice(), element.id));
         // console.log(element.id);
+        const p = document.createElement("p");
+        p.innerText = playRound(getComputerChoice(), element.id);
+        div.appendChild(p);
     });
 });
+
